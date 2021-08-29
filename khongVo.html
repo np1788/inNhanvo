@@ -220,10 +220,6 @@
               <th id="class" colspan="2" contenteditable="true"></th>
             </tr>
             <tr>
-              <th width="15%">Vở</th>
-              <th id="note" colspan="2" contenteditable="true"></th>
-            </tr>
-            <tr>
               <th width="15%">Năm học</th>
               <th id="year" colspan="2" contenteditable="true"></th>
             </tr>
@@ -392,7 +388,7 @@
       function addContext() {
         var newContent = '';
         var len = $('tr').length;
-        for (let i = 4, j = 1; i < len; i++, j++) {
+        for (let i = 3, j = 1; i < len; i++, j++) {
           newContent +=
             `<div>
         <p>Lớp: <b>${$('#class').html()?$('#class').html():'..........'}</b></p>
