@@ -406,10 +406,10 @@
         for (let i = 4, j = 1; i < len; i++, j++) {
           newContent +=
             `<div>
-        <p>Lớp: <b>${$('#class').html()?$('#class').html():'..........'}</b></p>
-        <p>Vở: <b>${$('#note').html()?$('#note').html():'........................................'}</b></p>
-        <p>${$('tr').eq(i).find("td").eq(1).html()?$('tr').eq(i).find("td").eq(1).html():'..................................................'}</p>
-        <p>Năm học: ${$('#year').html()?$('#year').html():'....................'}</p>
+        <p>Lớp: <b contenteditable="true">${$('#class').html()?$('#class').html():'..........'}</b></p>
+        <p>Vở: <b contenteditable="true">${$('#note').html()?$('#note').html():'........................................'}</b></p>
+        <p contenteditable="true">${$('tr').eq(i).find("td").eq(1).html()?$('tr').eq(i).find("td").eq(1).html():'..................................................'}</p>
+        <p contenteditable="true">Năm học: ${$('#year').html()?$('#year').html():'....................'}</p>
       </div>`;
 
           if (j % 10 == 0) {
