@@ -368,21 +368,12 @@
           // load lại Thôngtin
           addContext();
         });
-        // cancel paste
-        e.preventDefault();
-
-        // get text representation of clipboard
-        var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-        // insert text manually
-        document.execCommand("insertHTML", false, text);
-        });
       });
 
       // Hàm sửaSTT
       function numOrderFix() {
         $('#myTable tbody tr').each(function(index) {
-          $(this).find('td:eq(0)').text(numFormat(index - 3));
+          $(this).find('td:eq(0)').text(numFormat(index - 2));
         });
       }
       // Hàm dịnhzạngSố của sửaSTT
@@ -400,9 +391,9 @@
         for (let i = 3, j = 1; i < len; i++, j++) {
           newContent +=
             `<div>
-        <p>Lớp: <b contenteditable="true">${$('#class').html()?$('#class').html():'..........'}</b></p>
-        <p contenteditable="true">${$('tr').eq(i).find("td").eq(1).html()?$('tr').eq(i).find("td").eq(1).html():'..................................................'}</p>
-        <p contenteditable="true">Năm học: ${$('#year').html()?$('#year').html():'....................'}</p>
+        <p>Lớp: <b>${$('#class').html()?$('#class').html():'..........'}</b></p>
+        <p>${$('tr').eq(i).find("td").eq(1).html()?$('tr').eq(i).find("td").eq(1).html():'..................................................'}</p>
+        <p>Năm học: ${$('#year').html()?$('#year').html():'....................'}</p>
       </div>`;
 
           if (j % 10 == 0) {
@@ -415,4 +406,5 @@
   </body>
 
 </html>
+
 
