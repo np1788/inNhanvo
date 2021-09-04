@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes" /> 
     <meta name="mobile-web-app-capable" content="yes">
-    <title>In nhãn vở - 4 Zòng</title>
+    <title>in Nhãnvở</title>
     <style>
       /* Mặc định */
       :root {
@@ -14,19 +14,22 @@
         --fontSize-1b: 18px;
         --fontSize-2a: 14px;
         --fontSize-2b: 18px;
-        --fontSize-3: 24px;
-        --fontSize-4: 14px;
-        --lineHeight-1: 16px;
-        --lineHeight-2: 16px;
-        --lineHeight-3: 24px;
-        --lineHeight-4: 22px;
+        --fontSize-3: 28px;
+        --fontSize-4: 16px;
+        --lineHeight-1: 12px;
+        --lineHeight-2: 12px;
+        --lineHeight-3: 12px;
+        --lineHeight-4: 12px;
 
         --chieucaoNhanvo: 5cm;
         --chieuzaiNhanvo: 8cm;
+        --soNhanvo1Trang: 5;
+        --displayNote: block;
+        --marginTopOfClass: 28px;
       }
 
       @font-face {
-        font-family: HP001_5_hang_bold;
+        font-family: "HP001 5 hàng";
         src: url("HP001_5_hang_bold.otf");
       }
 
@@ -34,36 +37,74 @@
         box-sizing: border-box;
         font-size: 0;
       }
+      
+      .tooltip {
+        position: relative;
+      }
+
+      .tooltip > .tooltiptext {
+        visibility: hidden;
+        width: 130px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px 3px;
+        font-size: 12px;
+        font-family: Arial;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+      }
+
+      .tooltip:hover > .tooltiptext {
+        visibility: visible;
+      }
+      
+      .noselect {
+	  -webkit-touch-callout: none; /* iOS Safari */
+	    -webkit-user-select: none; /* Safari */
+	     -khtml-user-select: none; /* Konqueror HTML */
+	       -moz-user-select: none; /* Old versions of Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+		    user-select: none; /* Non-prefixed version, currently
+		                          supported by Chrome, Edge, Opera and Firefox */
+      }
 
       html,
       body {
         width: 100%;
         height: 100%;
         margin: 0px;
+        
+        font-family: Times;
+      }
+      textarea:focus, input:focus {
+        outline: none;
+      }
+      .hiddenE {
+        display: none;
       }
 
       @media print {
 
         .container__left,
         .resizer {
+          width: 0 !important;
           display: none;
         }
+        
+        .container, .container__right, .labels  {
+          width: 100% !important;
+        }
+      }
+      @page {
+        size: A4;
+        margin: 1cm;
       }
       
-        h3>p {
-          font-size: 10px;
-        }
-        h3 {
-          width: calc(2 * var(--chieuzaiNhanvo));
-        }
-
-
-
-
-
-
-
-
+      
       /* Khung resize */
       .container {
         display: flex;
@@ -75,29 +116,20 @@
 
       .container__left {
         /* Initially, the left takes 3/4 width */
-        width: 40%;
-
-        /* Misc 
-  align-items: center;
-  display: flex;
-  justify-content: center; */
+        width: 50%;
       }
 
       .resizer {
         background-color: #cbd5e0;
         cursor: ew-resize;
         min-height: 100%;
-        width: 10px;
+        width: 15px;
+        font-weight: bold;
       }
 
       .container__right {
         /* Take the remaining width */
         flex: 1;
-
-        /* Misc 
-  align-items: center;
-  display: flex;
-  justify-content: center; */
       }
 
 
@@ -110,52 +142,48 @@
 
 
       /* Khung nhãn vở */
-      .labels {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .labels>div {
-        background-image: url("https://i.imgur.com/CCCv1Rd.jpg");
+      .label {
+        float: left;
+        background-image: url("1.jpg");
         background-size: var(--chieuzaiNhanvo) var(--chieucaoNhanvo);
 
         width: var(--chieuzaiNhanvo);
         height: var(--chieucaoNhanvo);
-        margin: 0.1cm;
-
+        margin: 0 0.2cm 0.2cm 0;
+        border: 3px solid grey;
+        border-radius: 5px;
         text-align: center;
       }
 
-      div>p:nth-child(1) {
-        font-family: Times;
+      .label>p:nth-child(1) {
         font-size: var(--fontSize-1a);
-        line-height: var(--lineHeight-1)
+        line-height: var(--lineHeight-1);
+        margin-top: var(--marginTopOfClass);
       }
 
-      div>p:nth-child(1)>b {
-        font-family: HP001_5_hang_bold;
+      .label>p:nth-child(1)>b {
+        font-family: "HP001 5 hàng";
         font-size: var(--fontSize-1b);
       }
 
-      div>p:nth-child(2) {
-        font-family: Time;
+      .label>p:nth-child(2) {
+        display: var(--displayNote);
         font-size: var(--fontSize-2a);
         line-height: var(--lineHeight-2)
       }
       
-      div>p:nth-child(2)>b {
-        font-family: HP001_5_hang_bold;
+      .label>p:nth-child(2)>b {
+        font-family: "HP001 5 hàng";
         font-size: var(--fontSize-2b);
       }
 
-      div>p:nth-child(3) {
-        font-family: HP001_5_hang_bold;
+      .label>p:nth-child(3) {
+        font-family: "HP001 5 hàng";
         font-size: var(--fontSize-3);
         line-height: var(--lineHeight-3)
       }
 
-      div>p:nth-child(4) {
-        font-family: Times;
+      .label>p:nth-child(4) {
         font-size: var(--fontSize-4);
         line-height: var(--lineHeight-4)
       }
@@ -177,17 +205,27 @@
       td,
       th {
         border: 1px solid #ddd;
-        padding: 8px 10px;
-        text-align: center;
         font-size: 12px;
+        padding: 12px;
+        text-align: center;
+      }
+      td>input, th>input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: inherit;
+        color: inherit;
+        font-size: 16px;
+        text-align: center;
+        
+        font-family: Times;
+      }
+      th>input::placeholder {
+        color: #ddd;
       }
 
       tr:nth-child(even) {
         background-color: #f2f2f2;
-      }
-
-      tr>td:nth-child(2) {
-        text-align: left;
       }
 
       tr:hover {
@@ -195,8 +233,6 @@
       }
 
       th {
-        padding-top: 12px;
-        padding-bottom: 12px;
         text-align: center;
         background-color: #04AA6D;
         color: white;
@@ -205,9 +241,12 @@
       button {
         border: none;
         border-radius: 5px;
-        color: mintcream;
         background-color: #328054;
         font-size: 12px;
+        font-weight: bold;
+        color: white;
+        padding: 5px;
+        font-family: Times;
       }
 
       button.add-row,
@@ -216,6 +255,30 @@
         width: 24px;
         margin: 0 1px;
         padding: 5px 0;
+      }
+      
+      button.add-row:hover,
+      button.delete-row:hover,
+      button.add-row-bottom:hover {
+        background-color: #255d3d;
+      }
+      button.add-row:active,
+      button.delete-row:active,
+      button.add-row-bottom:active {
+        background-color: #49bb7b;
+      }
+      button.big {
+        width: 60px;
+        height: 40px;
+      }
+      button.big:hover {
+        background-color: #b31332;
+      }
+      button.big:active {
+        background-color: #f75170;
+      }
+      .crimson {
+        background-color: crimson;
       }
 
     </style>
@@ -226,38 +289,138 @@
     <div class="container">
       <div class="container__left">
         <div>
-          <table id="myTable">
-            <tr>
-              <th width="15%">Lớp</th>
-              <th id="class" colspan="2" contenteditable="true"></th>
+          <table id="myTable" class="noselect">
+           <tr>
+              <th width="16.66%" class="tooltip">fontSize 1a<span class="tooltiptext">Kíchcỡ của Chữ "Lớp:"</span></th>
+              <th width="16.66%"><input id="fontSize-1a" type="number" min="5" max="100" value="14"/>px</th>
+              <th width="16.66%" class="tooltip">fontSize 1b<span class="tooltiptext">Kíchcỡ của Tênlớp</span></th>
+              <th width="16.66%"><input id="fontSize-1b" type="number" min="5" max="100" value="18"/>px</th>
+              <th width="16.66%" class="tooltip">lineHeight 1<span class="tooltiptext">Khoảngxuốngzòng của "Lớp"</span></th>
+              <th width="16.66%"><input id="lineHeight-1" type="number" min="5" max="100" value="12"/>px</th>
             </tr>
             <tr>
-              <th width="15%">Vở</th>
-              <th id="note" colspan="2" contenteditable="true"></th>
+              <th width="16.66%" class="tooltip">fontSize 2a<span class="tooltiptext">Kíchcỡ của Chữ "Vở:"</span></th>
+              <th width="16.66%"><input id="fontSize-2a" type="number" min="5" max="100" value="14"/>px</th>
+              <th width="16.66%" class="tooltip">fontSize 2b<span class="tooltiptext">Kíchcỡ của Tênvở</span></th>
+              <th width="16.66%"><input id="fontSize-2b" type="number" min="5" max="100" value="18"/>px</th>
+              <th width="16.66%" class="tooltip">lineHeight 2<span class="tooltiptext">Khoảngxuốngzòng của "Vở"</span></th>
+              <th width="16.66%"><input id="lineHeight-2" type="number" min="5" max="100" value="12"/>px</th>
             </tr>
             <tr>
-              <th width="15%">Năm học</th>
-              <th id="year" colspan="2" contenteditable="true"></th>
+              <th width="16.66%"><button id="reset" class="tooltip big crimson">Reset<span class="tooltiptext">Reset các Kíchcỡ của Nhãnvở</span></button></th>
+              <th width="16.66%"><button id="toogleNote" class="big crimson">Bỏ Tênvở</button></th>
+              <th width="16.66%" class="tooltip">fontSize 3<span class="tooltiptext">Kíchcỡ của Tênhọcsinh</span></th>
+              <th width="16.66%"><input id="fontSize-3" type="number" min="5" max="100" value="28"/>px</th>
+              <th width="16.66%" class="tooltip">lineHeight-3<span class="tooltiptext">Khoảngxuốngzòng của "Tênhọcsinh"</span></th>
+              <th width="16.66%"><input id="lineHeight-3" type="number" min="5" max="100" value="12"/>px</th>
+            </tr>
+            <tr>
+              <th width="16.66%">Chiềucao nhãnvở</th>
+              <th width="16.66%"><input id="chieucaoNhanvo" type="number" min="3" max="20" value="5"/>cm</th>
+              <th width="16.66%" class="tooltip">fontSize 4<span class="tooltiptext">Kíchcỡ của Nămhọc</span></th>
+              <th width="16.66%"><input id="fontSize-4" type="number" min="5" max="100" value="16"/>px</th>
+              <th width="16.66%" class="tooltip">lineHeight 4<span class="tooltiptext">Khoảngxuốngzòng của "Nămhọc"</span></th>
+              <th width="16.66%"><input id="lineHeight-4" type="number" min="5" max="100" value="12"/>px</th>
+            </tr>
+            <tr>
+              <th width="16.66%">Chiềuzài nhãnvở</th>  
+              <th width="16.66%"><input id="chieuzaiNhanvo" type="number" min="4" max="20" value="8"/>cm</th>
+              <th width="16.66%"  class="tooltip" width="15%">Hìnhnền<span class="tooltiptext">chọn từ 1 đến 9 dể dổi Hìnhnền của Nhãnvở, hoặc xóa hết dể chọn Mặcdịnh</span></th>
+              <th  width="16.66%">
+                <input id="img" list="imgs" type="number" min="1" max="9" value="2"/>
+              </th>
+              <th width="16.66%" class="tooltip crimson">Nhãnvở in /1Trang<span class="tooltiptext">diềuchỉnh dể tránh các Nhãnvở tại cuối Trangin bị tràn rangoài</span></th>
+              <th width="16.66%" class="crimson"><input id="soNhanvo1Trang" type="number" min="3" max="20" value="5"/>chiếc</th>
+            </tr>
+            <tr>
+              
+            </tr>
+            <tr>
+              <th colspan="2" width="15%">Lớp</th> 
+              <th colspan="4"><input id="class" type="text" placeholder="1A" maxlength="2" style="text-transform:uppercase"/></th>
+            </tr>
+            <tr>
+              <th colspan="2" width="15%"  class="tooltip">Vở</th>
+              <th colspan="4"><input id="note" type="text" placeholder="Tiếngviệt" maxlength="20"/></th>
+            </tr>
+            <tr>
+              <th colspan="2" width="15%">Năm học</th>
+              <th colspan="4"><input id="Syear" type="number" min="2020" max="2100" value="2020"/><input id="Eyear" type="number" min="2021" max="2100" value="2021"/></th>
             </tr>
             <tr>
               <th width="15%">STT</th>
-              <th>Họ tên</th>
+              <th colspan="4">Họ tên</th>
               <th width="20%"><button class="add-row-bottom">+</button></th>
             </tr>
-
+            <tr>
+              <td>01</td><td colspan="4"><input type="text" placeholder= "An-Bình" maxlength="20"/></td>
+              <td><button class="add-row">+</button><button class="delete-row">-</button></td>
+            </tr>
+            <tr>
+              <td>02</td><td colspan="4"><input type="text" placeholder= "An-Bình" maxlength="20"/></td>
+              <td><button class="add-row">+</button><button class="delete-row">-</button></td>
+            </tr>
           </table>
         </div>
 
       </div>
-      <div class="resizer" id="dragMe"></div>
+      <div class="resizer tooltip" id="dragMe"><span class="tooltiptext">Kéo-Thả dể diềuchỉnh Chiềurộng trang. Không ảnhưởng dến Việcin</span></div>
       <div class="container__right">
         <div class="labels printable">
-          <div>
-            <p>Lớp: <b>..........</b></p>
-            <p>Vở: <b>....................</b></p>
-            <p>..................................................</p>
-            <p>Năm học: ....................</p>
-          </div>
+		<div class="label" style="background-image: url('1');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">1A</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('2');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">2B</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('3');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">3C</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('4');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">4D</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('5');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">5E</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('6');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">6F</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('7');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">7G</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('8');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">8H</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
+	      	<div class="label" style="background-image: url('9');">
+		<p>Lớp: <b contenteditable="true" style="text-transform:uppercase">9K</b></p>
+		<p>Vở: <b contenteditable="true">Tiếngviệt</b></p>
+		<p contenteditable="true">An-Bình</p>
+		<p contenteditable="true">2020 - 2021</p>
+	      	</div>
         </div>
       </div>
     </div>
@@ -341,10 +504,9 @@
 
         // thêm Hàng tại Vịtrí-click
         $('body').on('click', '.add-row', function() {
-          var a = $('#myTable thead tr:eq(' + 1 + ') th:eq(' + 3 + ')').text();
           var newRow = $(`
          <tr>
-          <td></td><td contenteditable="true"></td>
+          <td></td><td colspan="4"><input type="text" placeholder= "An-Bình" maxlength="20"/></td>
           <td><button class="add-row">+</button><button class="delete-row">-</button></td>
         </tr>`);
           var index = $(this).parents('tr').index();
@@ -356,10 +518,9 @@
 
         // thêm Hàng vào cuối-Bảng
         $('body').on('click', '.add-row-bottom', function() {
-          var a = $('#myTable tr:eq(' + 1 + ') th:eq(' + 3 + ')').text();
           var newRow = $(`
          <tr>
-          <td></td><td contenteditable="true"></td>
+          <td></td><td colspan="4"><input type="text" placeholder= "An-Bình" maxlength="20"/></td>
           <td><button class="add-row">+</button><button class="delete-row">-</button></td>
         </tr>`);
           $('#myTable tbody').append(newRow);
@@ -369,38 +530,137 @@
         });
 
         //Sửa các Giátrị, load lại Thôngtin
-        $('body').on('keyup', '#myTable', function() {
+        $("table").bind('keyup mouseup', function () {
           // load lại Thôngtin
           addContext();
         });
-        $('body').on('keyup', '#year', function() {
-          // load lại Thôngtin
+        $("#Syear").bind('keyup mouseup', function () {
+          // Tự động tăng năm
+          $("#Eyear").val(parseInt($("#Syear").val())+1);
           addContext();
         });
-        $('body').on('keyup', '#note', function() {
-          // load lại Thôngtin
+        $("#Eyear").bind('keyup mouseup', function () {
+          // Tự động giảm năm
+          $("#Syear").val(parseInt($("#Eyear").val())-1);
           addContext();
         });
-        $('body').on('keyup', '#class', function() {
-          // load lại Thôngtin
-          addContext();
-        });
-        editor.addEventListener("paste", function(e) {
-        // cancel paste
-        e.preventDefault();
+        /*
+        --fontSize-1a: 14px;
+        --fontSize-1b: 18px;
+        --fontSize-2a: 14px;
+        --fontSize-2b: 18px;
+        --fontSize-3: 24px;
+        --fontSize-4: 14px;
+        --lineHeight-1: 16px;
+        --lineHeight-2: 16px;
+        --lineHeight-3: 24px;
+        --lineHeight-4: 22px;
 
-        // get text representation of clipboard
-        var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-        // insert text manually
-        document.execCommand("insertHTML", false, text);
+        --chieucaoNhanvo: 5cm;
+        --chieuzaiNhanvo: 8cm;
+        --soNhanvo1Trang: 1;
+        */
+        $("#fontSize-1a").bind('keyup mouseup', function () {
+          $(':root').css('--fontSize-1a', $("#fontSize-1a").val()+'px');
+          addContext();
+        });
+        $("#fontSize-1b").bind('keyup mouseup', function () {
+          $(':root').css('--fontSize-1b', $("#fontSize-1b").val()+'px');
+          addContext();
+        });
+        $("#fontSize-2a").bind('keyup mouseup', function () {
+          $(':root').css('--fontSize-2a', $("#fontSize-2a").val()+'px');
+          addContext();
+        });
+        $("#fontSize-2b").bind('keyup mouseup', function () {
+          $(':root').css('--fontSize-2b', $("#fontSize-2b").val()+'px');
+          addContext();
+        });
+        $("#fontSize-3").bind('keyup mouseup', function () {
+          $(':root').css('--fontSize-3', $("#fontSize-3").val()+'px');
+          addContext();
+        });
+        $("#fontSize-4").bind('keyup mouseup', function () {
+          $(':root').css('--fontSize-4', $("#fontSize-4").val()+'px');
+          addContext();
+        });
+        $("#lineHeight-1").bind('keyup mouseup', function () {
+          $(':root').css('--lineHeight-1', $("#lineHeight-1").val()+'px');
+          addContext();
+        });
+        $("#lineHeight-2").bind('keyup mouseup', function () {
+          $(':root').css('--lineHeight-2', $("#lineHeight-2").val()+'px');
+          addContext();
+        });
+        $("#lineHeight-3").bind('keyup mouseup', function () {
+          $(':root').css('--lineHeight-3', $("#lineHeight-3").val()+'px');
+          addContext();
+        });
+        $("#lineHeight-4").bind('keyup mouseup', function () {
+          $(':root').css('--lineHeight-4', $("#lineHeight-4").val()+'px');
+          addContext();
+        });
+        $("#chieucaoNhanvo").bind('keyup mouseup', function () {
+          $(':root').css('--chieucaoNhanvo', $("#chieucaoNhanvo").val()+'cm');
+          addContext();
+        });
+        $("#chieuzaiNhanvo").bind('keyup mouseup', function () {
+          $(':root').css('--chieuzaiNhanvo', $("#chieuzaiNhanvo").val()+'cm');
+          addContext();
+        });
+        $("#soNhanvo1Trang").bind('keyup mouseup', function () {
+          $(':root').css('--soNhanvo1Trang', $("#soNhanvo1Trang").val());
+          addContext();
+        });
+        $('#toogleNote').click(function() {
+          
+          addContext();
+          //toogleNoteButtonLabel
+          if($(':root').css('--displayNote')==='none') { 
+            $(':root').css('--displayNote', 'block');
+            $(':root').css('--marginTopOfClass', '28px');
+            $('#toogleNote').html('Bỏ Tênvở');
+          } else {
+            $(':root').css('--displayNote', 'none');
+            $(':root').css('--marginTopOfClass', '48px');
+            $('#toogleNote').html('Thêm Tênvở'); 
+          }
+        });
+        $('#reset').click(function() { 
+          $('#fontSize-1a').val(14);
+          $('#fontSize-1b').val(18);
+          $('#fontSize-2a').val(14);
+          $('#fontSize-2b').val(18);
+          $('#fontSize-3').val(28);
+          $('#fontSize-4').val(16);
+          $('#lineHeight-1').val(12);
+          $('#lineHeight-2').val(12);
+          $('#lineHeight-3').val(12);
+          $('#lineHeight-4').val(12);
+          $('#chieucaoNhanvo').val(5);
+          $('#chieuzaiNhanvo').val(8);
+          $('#soNhanvo1Trang').val(5);
+          $(':root').css('--fontSize-1a', $("#fontSize-1a").val()+'px');
+          $(':root').css('--fontSize-1b', $("#fontSize-1b").val()+'px');
+          $(':root').css('--fontSize-2a', $("#fontSize-2a").val()+'px');
+          $(':root').css('--fontSize-2b', $("#fontSize-2b").val()+'px');
+          $(':root').css('--fontSize-3', $("#fontSize-3").val()+'px');
+          $(':root').css('--fontSize-4', $("#fontSize-4").val()+'px');
+          $(':root').css('--lineHeight-1', $("#lineHeight-1").val()+'px');
+          $(':root').css('--lineHeight-2', $("#lineHeight-2").val()+'px');
+          $(':root').css('--lineHeight-3', $("#lineHeight-3").val()+'px');
+          $(':root').css('--lineHeight-4', $("#lineHeight-4").val()+'px');
+          $(':root').css('--chieucaoNhanvo', $("#chieucaoNhanvo").val()+'cm');
+          $(':root').css('--chieuzaiNhanvo', $("#chieuzaiNhanvo").val()+'cm');
+          $(':root').css('--soNhanvo1Trang', $("#soNhanvo1Trang").val());
+          addContext();
         });
       });
 
       // Hàm sửaSTT
       function numOrderFix() {
         $('#myTable tbody tr').each(function(index) {
-          $(this).find('td:eq(0)').text(numFormat(index - 3));
+          $(this).find('td:eq(0)').text(numFormat(index - 9));
         });
       }
       // Hàm dịnhzạngSố của sửaSTT
@@ -413,22 +673,24 @@
       }
       // Hàm thêm 
       function addContext() {
+        var pp = parseInt($(':root').css('--soNhanvo1Trang'));
         var newContent = '';
         var len = $('tr').length;
-        for (let i = 4, j = 1; i < len; i++, j++) {
+        for (let i = 10, j = 1; i < len; i++, j++) {
           newContent +=
-            `<div>
-        <p>Lớp: <b contenteditable="true">${$('#class').html()?$('#class').html():'..........'}</b></p>
-        <p>Vở: <b contenteditable="true">${$('#note').html()?$('#note').html():'........................................'}</b></p>
-        <p contenteditable="true">${$('tr').eq(i).find("td").eq(1).html()?$('tr').eq(i).find("td").eq(1).html():'..................................................'}</p>
-        <p contenteditable="true">Năm học: ${$('#year').html()?$('#year').html():'....................'}</p>
+            `<div class="label">
+        <p>Lớp: <b contenteditable="true" style="text-transform:uppercase">${$('#class').val()?$('#class').val():'1A'}</b></p>
+        <p>Vở: <b contenteditable="true">${$('#note').val()?$('#note').val():'Tiếngviệt'}</b></p>
+        <p contenteditable="true">${$('tr').eq(i).find("td").eq(1).find("input").eq(0).val()?$('tr').eq(i).find("td").eq(1).find("input").eq(0).val():'An-Bình'}</p>
+        <p contenteditable="true">${$('#Syear').val()} - ${$('#Eyear').val()}</p>
       </div>`;
 
-          if (j % 10 == 0) {
-            newContent += '<h3><p>.</p><p>.</p><p>.</p></h3>';
+          if (j % pp == 0) {
+            newContent += '<p></p><p style="break-after: page; page-break-after: left;"></p>';
           }
         }
         $('.labels').html(newContent);
+        $('.label').css('background-image', `url("${$('#img').val()?$('#img').val():'https://i.imgur.com/HKWkAva.jpg'}")`);
       }
     </script>
   </body>
