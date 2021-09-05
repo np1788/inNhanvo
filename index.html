@@ -14,7 +14,7 @@
         --fontSize-1b: 18px;
         --fontSize-2a: 14px;
         --fontSize-2b: 18px;
-        --fontSize-3: 28px;
+        --fontSize-3: 22px;
         --fontSize-4: 16px;
         --lineHeight-1: 12px;
         --lineHeight-2: 12px;
@@ -116,7 +116,7 @@
 
       .container__left {
         /* Initially, the left takes 3/4 width */
-        width: 50%;
+        width: 40%;
       }
 
       .resizer {
@@ -145,12 +145,12 @@
       .label {
         float: left;
         background-image: url("1.jpg");
-        background-size: var(--chieuzaiNhanvo) var(--chieucaoNhanvo);
+        background-size: calc(var(--chieuzaiNhanvo) - 10px) calc(var(--chieucaoNhanvo) - 10px);
 
         width: var(--chieuzaiNhanvo);
         height: var(--chieucaoNhanvo);
         margin: 0 0.2cm 0.2cm 0;
-        border: 3px solid grey;
+        border: 5px solid grey;
         border-radius: 5px;
         text-align: center;
       }
@@ -307,10 +307,10 @@
               <th width="16.66%"><input id="lineHeight-2" type="number" min="5" max="100" value="12"/>px</th>
             </tr>
             <tr>
-              <th width="16.66%"><button id="reset" class="tooltip big crimson">Reset<span class="tooltiptext">Reset các Kíchcỡ của Nhãnvở</span></button></th>
-              <th width="16.66%"><button id="toogleNote" class="big crimson">Bỏ Tênvở</button></th>
+              <th width="16.66%"><button id="reset" class="tooltip big crimson">Reset<span class="tooltiptext">khôiphục các Kíchcỡ của Nhãnvở</span></button></th>
+              <th width="16.66%"><button id="toogleNote" class="big crimson">bỏ Tênvở</button></th>
               <th width="16.66%" class="tooltip">fontSize 3<span class="tooltiptext">Kíchcỡ của Tênhọcsinh</span></th>
-              <th width="16.66%"><input id="fontSize-3" type="number" min="5" max="100" value="28"/>px</th>
+              <th width="16.66%"><input id="fontSize-3" type="number" min="5" max="100" value="22"/>px</th>
               <th width="16.66%" class="tooltip">lineHeight-3<span class="tooltiptext">Khoảngxuốngzòng của "Tênhọcsinh"</span></th>
               <th width="16.66%"><input id="lineHeight-3" type="number" min="5" max="100" value="12"/>px</th>
             </tr>
@@ -329,7 +329,7 @@
               <th  width="16.66%">
                 <input id="img" list="imgs" type="number" min="1" max="9" value="2"/>
               </th>
-              <th width="16.66%" class="tooltip crimson">Nhãnvở in /1Trang<span class="tooltiptext">diềuchỉnh dể tránh các Nhãnvở tại cuối Trangin bị tràn rangoài</span></th>
+              <th width="16.66%" class="tooltip crimson">Nhãnvở in /1Trang<span class="tooltiptext">diềuchỉnh dể tránh các Nhãnvở tại cuối Trang bị in tràn rangoài</span></th>
               <th width="16.66%" class="crimson"><input id="soNhanvo1Trang" type="number" min="3" max="20" value="5"/>chiếc</th>
             </tr>
             <tr>
@@ -344,12 +344,12 @@
               <th colspan="4"><input id="note" type="text" placeholder="Tiếngviệt" maxlength="20"/></th>
             </tr>
             <tr>
-              <th colspan="2" width="15%">Năm học</th>
+              <th colspan="2" width="15%">Nămhọc</th>
               <th colspan="4"><input id="Syear" type="number" min="2020" max="2100" value="2020"/><input id="Eyear" type="number" min="2021" max="2100" value="2021"/></th>
             </tr>
             <tr>
-              <th width="15%">STT</th>
-              <th colspan="4">Họ tên</th>
+              <th width="15%">S.T.T.</th>
+              <th colspan="4">Họtên</th>
               <th width="20%"><button class="add-row-bottom">+</button></th>
             </tr>
             <tr>
@@ -364,7 +364,7 @@
         </div>
 
       </div>
-      <div class="resizer tooltip" id="dragMe"><span class="tooltiptext">Kéo-Thả dể diềuchỉnh Chiềurộng trang. Không ảnhưởng dến Việcin</span></div>
+      <div class="resizer tooltip" id="dragMe"><span class="tooltiptext">kéo-thả dể diềuchỉnh Chiềurộng trang. Không ảnhưởng dến Việcin</span></div>
       <div class="container__right">
         <div class="labels printable">
 		<div class="label" style="background-image: url('1');">
@@ -619,11 +619,11 @@
           if($(':root').css('--displayNote')==='none') { 
             $(':root').css('--displayNote', 'block');
             $(':root').css('--marginTopOfClass', '28px');
-            $('#toogleNote').html('Bỏ Tênvở');
+            $('#toogleNote').html('bỏ Tênvở');
           } else {
             $(':root').css('--displayNote', 'none');
             $(':root').css('--marginTopOfClass', '48px');
-            $('#toogleNote').html('Thêm Tênvở'); 
+            $('#toogleNote').html('thêm Tênvở'); 
           }
         });
         $('#reset').click(function() { 
@@ -631,7 +631,7 @@
           $('#fontSize-1b').val(18);
           $('#fontSize-2a').val(14);
           $('#fontSize-2b').val(18);
-          $('#fontSize-3').val(28);
+          $('#fontSize-3').val(22);
           $('#fontSize-4').val(16);
           $('#lineHeight-1').val(12);
           $('#lineHeight-2').val(12);
